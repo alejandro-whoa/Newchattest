@@ -1,0 +1,2 @@
+# Newchattest
+Testing AI capabilities
