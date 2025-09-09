@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Chat</title>
+    <link href="./css/tailwind.css" rel="stylesheet">
+    <style>
+        body { margin: 0; overflow: hidden; } /* For full-screen WebGL */
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Keep it in the background */
+        }
+        .chat-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 0.5rem; /* For scrollbar */
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar for a smoother look */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: #2d3748; /* bg-gray-800 */
+            border-radius: 10px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #4a5568; /* bg-gray-700 */
+            border-radius: 10px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0; /* bg-gray-500 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased">
+
+    <!-- WebGL Canvas - will be initialized by webgl-visualizer.js -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <div class="chat-container">
+        <!-- Header -->
+        <header class="text-center py-4">
+            <h1 class="text-3xl font-bold text-blue-400">Multimodal AI Chat</h1>
+        </header>
+
+        <!-- Chat Messages Area -->
+        <div id="chat-messages" class="chat-messages mb-4 p-4 bg-gray-800 rounded-lg shadow-lg flex-grow overflow-y-auto">
+            <!-- Messages will be injected here by JavaScript -->
+            <div class="flex items-start mb-4">
+                <div class="flex-shrink-0 mr-3">
+                    <div class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-sm font-bold">AI</div>
+                </div>
+                <div class="bg-gray-700 p-3 rounded-lg max-w-xs md:max-w-md">
+                    <p>Hello! How can I assist you today?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="chat-input-area flex items-center p-4 bg-gray-800 rounded-lg shadow-lg">
+            <input type="file" id="file-upload" class="hidden" accept="image/*, audio/*, video/*, .pdf">
+            <button id="attach-button" class="p-2 rounded-full bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+            </button>
+            <input type="text" id="chat-input" placeholder="Type your message..." class="flex-grow p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2">
+            <button id="send-button" class="p-3 rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="./js/three.min.js"></script> <!-- A popular WebGL library -->
+    <script src="./js/webgl-visualizer.js"></script>
+    <script src="./js/streaming-handler.js"></script>
+    <script src="./js/chat-ui.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
